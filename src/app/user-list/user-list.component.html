@@ -1,0 +1,36 @@
+
+<app-header></app-header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 offset-md-1 paddingTop">
+
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">RUT</th>
+                    <th scope="col">Nombre Completo</th>
+                    <th scope="col">Correo Electronico</th>
+                    <th scope="col">Edad</th>
+                    <th scope="col">Sexo</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Perfil</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let user of users;">
+                    <th scope="row">{{user.id}}</th>
+                    <td>{{user.rut}}</td>
+                    <td>{{user.nombre | titlecase}} {{user.apellido | titlecase}}</td>
+                    <td>{{user.correo}}</td>
+                    <td>{{user.edad}}</td>
+                    <td>{{user.sexo | titlecase}}</td>
+                    <td>{{user.estado}}</td>
+                    <td>{{user.perfil}}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>

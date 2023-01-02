@@ -1,0 +1,114 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2 paddingTop">
+            <div class="modal fade" id="quoteModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Detalle de Cotización</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">ID</th>
+                                        <td>{{detail.idCotizacion}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Descuento</th>
+                                        <td>{{detail.descuento | currency}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Subtotal</th>
+                                        <td>{{detail.subtotal|currency}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Total</th>
+                                        <td>{{detail.total |currency}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Fecha de Creación</th>
+                                        <td>{{detail.fechaCreacion | date:'dd/MM/y'}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Estado</th>
+                                        <td>{{detail.estado}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Monto del Credito</th>
+                                        <td>{{detail.montoCredito | currency}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Rut Cliente</th>
+                                        <td>{{detail.rutCliente}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Cliente</th>
+                                        <td>{{detail.cliente | titlecase}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Usuario</th>
+                                        <td>{{detail.usuario | titlecase}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Tipo de Producto</th>
+                                        <td>{{detail.tipoProducto}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Valor Producto</th>
+                                        <td>{{detail.valorProducto | currency}}</td>
+                                    </tr> 
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                Cerrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">RUT Cliente</th>
+                        <th scope="col">Subtotal</th>
+                        <th scope="col">Descuento</th>
+                        <th scope="col">Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let quote of quotes | paginate:{
+                        itemsPerPage: tableSize,
+                        currentPage: page,
+                        totalItems: count
+                      };let i = index;  ">
+                        <th scope="row">{{ quote.idCotizacion}}</th>
+                        <td>{{ quote.rutCliente }}</td>
+                        <td>{{ quote.subtotal | currency}}</td>
+                        <td>{{ quote.descuento | currency }}</td>
+                        <td>{{ quote.total | currency }}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary" (click)="showDetail(quote.idCotizacion)">
+                                Detalle
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-center">
+                <pagination-controls
+                  previousLabel="Prev"
+                  nextLabel="Next"
+                  (pageChange)="onTableDataChange($event)"
+                >
+                </pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>
